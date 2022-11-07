@@ -17,8 +17,8 @@ async function main() {
             title: 'examplePool',
             code: 'pool123',
             ownerId: user.id,
-            participants:{
-                create:{
+            participants: {
+                create: {
                     userId: user.id,
                 }
             }
@@ -26,35 +26,28 @@ async function main() {
     })
     await prisma.game.create({
         data: {
-            date: '2022-11-05T12:00:00.503Z',
-            firstTeamCountryCode: 'DE',
-            secondTeamCountryCode: 'BR'
-        }
-
-    })
-    await prisma.game.create({
-        data: {
             date: '2022-11-06T12:00:00.503Z',
             firstTeamCountryCode: 'BR',
             secondTeamCountryCode: 'AR',
-
+            
+            
             guesses: {
                 create: {
-                    firstTeamPoints: 2,
-                    secondTeamPoints: 1,
-
+                    firstTeamPoints: 1,
+                    secondTeamPoints: 2,
                     participant: {
                         connect: {
-                        userId_poolId: {
-                            userId: user.id,
-                            poolId: user.id
+                            userId_poolId: {
+                                userId: user.id,
+                                poolId: pool.id
+                            }
                         }
-                        }
-                    }
-                                        
-                } 
-            }
-        }
-    })
+                    },
+                    
 
+                }
+           }
+        },
+    })
+}
 main()
