@@ -10,16 +10,13 @@ export function Button({ text, type = 'PRIMARY', ...rest }: ButtonProps) {
     return (
         <ButtonNativeBase leftIcon={<Icon as={Fontisto} name="google" color="white" size="md" />}
             rounded={4}
-            bg={type === 'SECONDARY' ? '#DB4437' : '#FDE34D'}
             _pressed={{
                 bg: type === 'SECONDARY'? 'red.400' : 'yellow.600'
             }}
             width={320}
             height={52}
             textTransform='uppercase'
-            _loading={{
-                _spinner: { color: 'black'}
-            }}
+            bg={type === 'SECONDARY' ? 'red.500' : 'yellow .600'}
             {...rest}
         >
 
