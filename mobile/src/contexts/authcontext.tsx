@@ -20,9 +20,10 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextDataProps) 
 
 export function AuthContextProvider ({ children } : AuthProviderProps){
+    const [user, setUser] = useState<UserProps>({} as UserProps)
     const [isUserLoading, setisUserLoading] = useState(false)
 
-    const [request, response, prompAsync] = Google.useAuthRequest({
+    const [request, response, promptAsync] = Google.useAuthRequest({
         clientId: '827649355741-3a5hrihvg4k7q7fsthtm3sqnpvmqmtv0.apps.googleusercontent.com',
         redirectUri: AuthSession.makeRedirectUri({ useProxy: true }),
         scopes: ['profile', 'email']
@@ -31,7 +32,7 @@ export function AuthContextProvider ({ children } : AuthProviderProps){
 
         try {
             setisUserLoading(true)
-            await prompAsync()
+            await promptAsync()
         } catch (error) {
            console.log(error)
            throw error
@@ -52,10 +53,7 @@ export function AuthContextProvider ({ children } : AuthProviderProps){
         <AuthContext.Provider value={{
             signIn,
             isUserLoading,
-            user: {
-                name: 'Rodrigo',
-                avatarUrl: 'https://github.com/nicomsz.png'
-            }
+            user
         }}>
             {children}
 
