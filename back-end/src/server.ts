@@ -8,9 +8,7 @@ import { userRoutes } from './routes/user'
 import { gameRoutes } from './routes/game'
 import { guessesRoutes } from './routes/guess'
 import { authRoutes } from './routes/auth'
-const prisma = new PrismaClient({
-    log: ['query']
-})
+import jwt from '@fastify/jwt'
 
 async function bootstrap() {
     const fastify = Fastify({
@@ -21,6 +19,9 @@ async function bootstrap() {
     await fastify.register(cors, {
         origin: true
 
+    })
+    await fastify.register(jwt,{
+        secret: 'nlwcopa'
     })
     await fastify.register(poolRoutes)
     await fastify.register(userRoutes)
